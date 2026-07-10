@@ -12,13 +12,13 @@ A super simple FastAPI application that allows students to view and sign up for 
 1. Install the dependencies:
 
    ```
-   pip install fastapi uvicorn
+   pip install -r requirements.txt
    ```
 
 2. Run the application:
 
    ```
-   python app.py
+   uvicorn src.app:app --reload
    ```
 
 3. Open your browser and go to:
@@ -31,6 +31,28 @@ A super simple FastAPI application that allows students to view and sign up for 
 | ------ | ----------------------------------------------------------------- | ------------------------------------------------------------------- |
 | GET    | `/activities`                                                     | Get all activities with their details and current participant count |
 | POST   | `/activities/{activity_name}/signup?email=student@mergington.edu` | Sign up for an activity                                             |
+| DELETE | `/activities/{activity_name}/unregister?email=student@mergington.edu` | Unregister from an activity                                     |
+
+## Testing
+
+Run backend tests with pytest:
+
+```
+pytest -v
+```
+
+Run specific endpoint test files:
+
+```
+pytest tests/test_signup.py -v
+pytest tests/test_unregister.py -v
+```
+
+Test suite notes:
+
+- Tests are in the `tests/` directory.
+- Tests follow the Arrange-Act-Assert (AAA) structure.
+- Tests validate current behavior, including case-sensitive activity names and `404` for unregistering a non-member.
 
 ## Data Model
 
